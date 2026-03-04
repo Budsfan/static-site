@@ -55,7 +55,11 @@ def paragraph_parent_block(text):
     return ParentNode("p", text_to_children(" ".join(text.splitlines())))
 
 def quote_parent_block(text):
-    return ParentNode("blockquote", text_to_children(text))
+    block_text = ''
+    for line in text.splitlines():
+        item_text = line.split(">", maxsplit=1)[1].strip()
+        block_text += item_text
+    return ParentNode("blockquote", text_to_children(block_text))
 
 def unordered_list_parent_block(text):
     children = []
